@@ -6,9 +6,10 @@ comfy_entrypoint for builds whose loader prefers the V3 schema API.
 
 from .nodes import NODE_CLASS_MAPPINGS, NODE_DISPLAY_NAME_MAPPINGS
 
+__all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS"]
+
 try:
     from .nodes import comfy_entrypoint  # noqa: F401
+    __all__.append("comfy_entrypoint")
 except ImportError:
     pass
-
-__all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS", "comfy_entrypoint"]
