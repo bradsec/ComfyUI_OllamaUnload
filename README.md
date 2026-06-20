@@ -103,3 +103,9 @@ No extra dependencies (Python stdlib only).
 ## Compatibility
 
 Dual API: exports the legacy V1 `NODE_CLASS_MAPPINGS` and a V3 `comfy_entrypoint` (`comfy_api`). Verified on ComfyUI 0.25.0. On builds whose loader reads `NODE_CLASS_MAPPINGS` first, the V1 path is used and `comfy_entrypoint` is skipped, so the node is never registered twice.
+
+---
+
+## Support
+
+If you find this useful, please consider [starring the repo](https://github.com/bradsec/ComfyUI_OllamaUnload). Stars help other people discover these nodes.
