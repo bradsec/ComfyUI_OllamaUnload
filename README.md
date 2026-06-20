@@ -91,6 +91,12 @@ In terminal 1 the model row disappears and free VRAM jumps the moment the comman
 
 ## Installation
 
+### ComfyUI Manager (recommended)
+
+In ComfyUI, open **Manager > Custom Nodes Manager**, search for **ComfyUI_OllamaUnload**, click **Install**, then restart ComfyUI.
+
+### Manual install
+
 Clone into your ComfyUI `custom_nodes` directory and restart ComfyUI:
 
 ```bash
