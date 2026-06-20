@@ -47,7 +47,7 @@ class OllamaUnloadV1:
     RETURN_TYPES = (ANY, "STRING")
     RETURN_NAMES = ("passthrough", "status")
     FUNCTION = "run"
-    CATEGORY = "ollama"
+    CATEGORY = "Ollama"
     DESCRIPTION = "Unload one or all Ollama models to free VRAM. Wire a prompt through passthrough to force it to run before image sampling."
 
     @classmethod
@@ -73,7 +73,7 @@ try:
             return io.Schema(
                 node_id="OllamaUnload",
                 display_name="Ollama Unload (free VRAM)",
-                category="ollama",
+                category="Ollama",
                 description="Unload one or all Ollama models to free VRAM. Wire a prompt through passthrough to force it to run before image sampling.",
                 inputs=[
                     io.String.Input("url", default=_URL_DEFAULT),

@@ -1,7 +1,7 @@
 [project]
 name = "comfyui_ollamaunload"
-description = "Unload one or all Ollama models mid-workflow to free VRAM before image sampling. Wire your prompt through the passthrough socket so the node runs before the sampler. Node name: Ollama Unload (free VRAM). Located under Add Node > ollama."
-version = "1.0.0"
+description = "Unload one or all Ollama models mid-workflow to free VRAM before image sampling. Wire your prompt through the passthrough socket so the node runs before the sampler. Node name: Ollama Unload (free VRAM). Located under Add Node > Ollama."
+version = "1.0.1"
 license = { file = "LICENSE" }
 requires-python = ">=3.10"
 dependencies = []
