@@ -64,9 +64,20 @@ def unload_ollama(url, model="", wait=True, timeout=60, free_comfy_vram=True):
             f"OllamaUnload: cannot reach Ollama at {base} (/api/ps): {e}"
         )
 
-    targets = [model.strip()] if model.strip() else list(loaded)
-    targets = [t for t in targets if t]
     msgs = []
+    loaded_set = set(loaded)
+    requested = model.strip()
+    if requested:
+        # Only unload if actually resident. Sending an unloaded name to
+        # /api/generate would make Ollama load-then-unload it (a wasteful
+        # load and a transient VRAM spike), the opposite of the intent.
+        if requested in loaded_set:
+            targets = [requested]
+        else:
+            targets = []
+            msgs.append(f"not loaded, nothing to unload: {requested}")
+    else:
+        targets = [t for t in loaded if t]
 
     for m in targets:
         try:

@@ -28,7 +28,7 @@ It uses Ollama's documented graceful unload (`POST /api/generate` with `keep_ali
 |---|---|---|---|
 | `passthrough` | any (optional) | - | Wire your final prompt/conditioning through here so the node runs BEFORE the sampler. See Usage. |
 | `url` | STRING | `http://127.0.0.1:11434` | Ollama base URL. |
-| `model` | STRING | `` (empty) | Exact model to unload, e.g. `gemma4:26b`. Empty unloads every loaded model. |
+| `model` | STRING | `` (empty) | Exact model to unload, e.g. `gemma4:26b`. Empty unloads every loaded model. A named model that is not currently loaded is skipped (it is never loaded just to unload it). |
 | `wait` | BOOLEAN | `true` | Block until the model leaves Ollama memory (VRAM actually freed) before continuing. |
 | `timeout` | INT | `60` | Max seconds to wait for the unload and the resident-memory poll. |
 | `free_comfy_vram` | BOOLEAN | `true` | Also unload ComfyUI's own models and empty the CUDA cache. |

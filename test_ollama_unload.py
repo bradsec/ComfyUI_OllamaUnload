@@ -75,6 +75,31 @@ class TestUnloadCore(unittest.TestCase):
                            wait=False, timeout=2, free_comfy_vram=False)
         self.assertEqual(fake.unload_calls, ["gemma4:26b"])
 
+    def test_explicit_model_not_loaded_is_skipped(self):
+        # F1: a named model that is not resident must NOT be sent to
+        # /api/generate (which would load-then-unload it).
+        fake = FakeOllama(["other-model"])
+        core._http_json = fake
+        status = core.unload_ollama("http://x:11434", model="gemma4:26b",
+                                    wait=True, timeout=5, free_comfy_vram=False)
+        self.assertEqual(fake.unload_calls, [])
+        self.assertIn("not loaded", status)
+        self.assertEqual(fake.loaded, ["other-model"])
+
+    def test_warns_if_still_resident(self):
+        # Unload that never frees the model -> WARNING after timeout.
+        class StuckOllama(FakeOllama):
+            def __call__(self, url, payload=None, method=None, timeout=10):
+                if url.endswith("/api/generate"):
+                    self.unload_calls.append(payload["model"])
+                    return {"done": True}  # does NOT remove from loaded
+                return super().__call__(url, payload, method, timeout)
+        core._http_json = StuckOllama(["gemma4:26b"])
+        status = core.unload_ollama("http://x:11434", model="gemma4:26b",
+                                    wait=True, timeout=1, free_comfy_vram=False)
+        self.assertIn("WARNING", status)
+        self.assertIn("gemma4:26b", status)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
