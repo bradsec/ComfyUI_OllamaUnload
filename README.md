@@ -2,7 +2,9 @@
 
 A single utility node that unloads one or all Ollama models from memory mid-workflow, freeing GPU VRAM before an image-generation step runs on the same card.
 
-The node will be located under **Add Node > ollama**. Node name: **Ollama Unload (free VRAM)**.
+![node screenshot](samples/node.png)
+
+The node will be located under **Add Node > Ollama**. Node name: **Ollama Unload (free VRAM)**.
 
 Designed for use in conjunction with the [stavsap/comfyui-ollama](https://github.com/stavsap/comfyui-ollama) node pack (or any similar pack that runs Ollama from ComfyUI). Those packs generate from a model; this node frees the VRAM that model holds. It talks to Ollama directly over its HTTP API, so it does not depend on any specific pack and works alongside whichever one you use.
 
